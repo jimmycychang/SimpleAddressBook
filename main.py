@@ -68,7 +68,7 @@ def update():
 def edit():
   global editor
   editor = Tk()
-  editor.title("Update a record")
+  editor.title("Edit Record")
   editor.iconbitmap("icon.ico")
   conn = sqlite3.connect("address_book.db")
   c = conn.cursor()
@@ -98,17 +98,17 @@ def edit():
   zipcode_editor.grid(row=6, column=1, padx=20)
 
   f_name_label = Label(editor, text="First Name")
-  f_name_label.grid(row=1,column=0, pady=(10,0))
+  f_name_label.grid(row=1,column=0, pady=(10,0), sticky=W)
   l_name_label = Label(editor, text="Last Name")
-  l_name_label.grid(row=2,column=0)
+  l_name_label.grid(row=2,column=0, sticky=W)
   address_label = Label(editor, text="Address")
-  address_label.grid(row=3,column=0)
+  address_label.grid(row=3,column=0, sticky=W)
   city_label = Label(editor, text="City")
-  city_label.grid(row=4,column=0)
+  city_label.grid(row=4,column=0, sticky=W)
   state_label = Label(editor, text="State")
-  state_label.grid(row=5,column=0)
+  state_label.grid(row=5,column=0, sticky=W)
   zipcode_label = Label(editor, text="Zipcode")
-  zipcode_label.grid(row=6,column=0)
+  zipcode_label.grid(row=6,column=0, sticky=W)
   
   for record in records:
      f_name_editor.insert(0, record[0])
@@ -119,7 +119,7 @@ def edit():
      zipcode_editor.insert(0, record[5])
 
   edit_btn = Button(editor, text="Save Record", command=update)
-  edit_btn.grid(row=8, column=0, columnspan=2, pady=10, padx=10, ipadx=108)
+  edit_btn.grid(row=8, column=0, columnspan=2, pady=10, sticky=W+E)
   
 def query():
     conn = sqlite3.connect("address_book.db")
@@ -174,6 +174,7 @@ state.grid(row=5, column=1, padx=10)
 zipcode = Entry(root, width=30)
 zipcode.grid(row=6, column=1, padx=10)
 delete_box = Entry(root, width=30)
+delete_box.insert(0, "Enter the number:")
 delete_box.grid(row=9, column=1)
 
 f_name_label = Label(root, text="First Name")
@@ -199,7 +200,7 @@ delete_btn = Button(root, text="Delete Record", command=delete)
 delete_btn.grid(row=10, column=0, columnspan=2, pady=(10,0), sticky=W+E)
 edit_btn = Button(root, text="Edit Record", command=edit)
 edit_btn.grid(row=11, column=0, columnspan=2, pady=(0,10), sticky=W+E)
-show_btn = Button(root, text="Show Whole Address Book", command=show)
+show_btn = Button(root, text="Show Address Book", command=show)
 show_btn.grid(row=0, column=0, columnspan=2, pady=(10,0), sticky=W+E)
 
 conn.commit()
